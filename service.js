@@ -34,11 +34,17 @@ module.exports = (api, options) => {
                         dll.resolveAddAssetHtmlArgs()
                     )
                 if(config.plugins.has('copy')) {
+                    // 功能升级：dll文件指定输出路径和使用路径
+                    let publicPath = dll.dllConfig.output?.publicPath
+                    if (publicPath) {
+                      publicPath = publicPath.replaceAll(/(^\/|\/$)/g, '') + '/'
+                    }
                     // add copy agrs
                     config.plugin('copy').tap(args => {
                         args[0][0].ignore.push(dll.outputDir + '/**')
                         args[0].push({
                             from: dll.outputPath,
+                            to: publicPath,
                             toType: 'dir',
                             ignore: ['*.js', '*.css', '*.manifest.json']
                         })
