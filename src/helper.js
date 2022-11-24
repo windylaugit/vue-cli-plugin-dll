@@ -151,13 +151,16 @@ const getAssetHtmlPluginDefaultArg = (filepath, dll) => {
     if (!isAcceptTypeByAssetPlugin(typeOfAsset)) {
         return false
     }
-    const publicPath = dll.webpackConfig.output.publicPath
+    // 功能升级：dll文件指定输出路径和使用路径
+    const usedPublicPath = dll.dllConfig.output?.publicPath || dll.webpackConfig.output.publicPath
+    const publicPath = usedPublicPath + typeOfAsset
+    const outputPath = publicPath.replaceAll(/^\//g, '')
     return {
         filepath,
         includeSourcemap: false,
         typeOfAsset: typeOfAsset,
-        publicPath: publicPath + typeOfAsset,
-        outputPath: typeOfAsset
+        publicPath: publicPath,
+        outputPath: outputPath
     }
 }
 
