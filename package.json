@@ -1,7 +1,7 @@
 {
-    "name": "vue-cli-plugin-dll",
-    "version": "1.1.12",
-    "description": "vue-cli 3 plugin for Dll and DllReference",
+    "name": "vue-cli-plugin-ds_dll",
+    "version": "1.2.1",
+    "description": "[diansan] vue-cli 3 plugin for Dll and DllReference",
     "main": "service.js",
     "repository": "git+https://github.com/fingerpan/vue-cli-plugin-dll.git",
     "homepage": "https://github.com/fingerpan/vue-cli-plugin-dll",
@@ -11,6 +11,13 @@
         "plugin",
         "Dll",
         "DllReference"
+    ],
+    "files": [
+        "src",
+        "generator.js",
+        "package.json",
+        "README.md",
+        "service.js"
     ],
     "author": "youngpan",
     "license": "MIT",
@@ -26,5 +33,12 @@
     },
     "peerDependencies": {
         "@vue/cli-service": "^3.3.0"
+    },
+    "scripts": {
+        "deploy:pack": "npm pack",
+        "deploy:login": "npm login --registry http://npm.yitaosoft.com",
+        "deploy": "npm publish --registry http://npm.yitaosoft.com",
+        "undeploy": "npm unpublish --force --registry http://npm.yitaosoft.com",
+        "buildUpVersionDeploy": "yarn run build && yarn run upVersion:patch && yarn run deploy"
     }
 }
