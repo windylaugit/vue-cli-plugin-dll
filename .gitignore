@@ -8,3 +8,6 @@ npm-debug.log
 package-lock.json
 .npm
 .history
+
+# yarn
+.yarn
